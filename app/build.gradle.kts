@@ -122,12 +122,6 @@ android {
     }
 }
 
-kotlin {
-    compilerOptions {
-        jvmTarget.set(org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_17)
-    }
-}
-
 androidComponents {
     onVariants { variant ->
         variant.sources.assets?.addGeneratedSourceDirectory(
@@ -194,6 +188,11 @@ dependencies {
     // Libphonenumber
     implementation(libs.libphonenumber)
     libphonenumberArtifact(libs.libphonenumber)
+
+    // Room (disabled - KSP/kapt setup pending)
+    // implementation(libs.room.runtime)
+    // implementation(libs.room.ktx)
+    // kapt(libs.room.compiler)
 
     // Shizuku
     implementation(libs.shizukuApi)

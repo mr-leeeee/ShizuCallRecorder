@@ -1,27 +1,289 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ ShizuCallRecorder: FOSS Call recording powered through ADB/Shizuku!
+  ~  Copyright (C) 2026-present kitsumed (Med)
+  ~  This software is licensed under the GNU General Public License v3 or later, with additional terms as permitted under Section 7.
+  ~  This software is distributed WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+  ~  Korean translation (values-ko)
+  -->
+
 <resources>
+    <!-- ========================================== -->
+    <!-- GENERAL MESSAGES & APP LEVEL               -->
+    <!-- ========================================== -->
     <string name="general_close">닫기</string>
     <string name="general_continue">계속</string>
     <string name="general_ok">확인</string>
     <string name="general_cancel">취소</string>
     <string name="general_settings">설정</string>
-    <string name="general_licenses">라이센스</string>
+    <string name="general_licenses">라이선스</string>
     <string name="general_record">녹음</string>
+    <string name="general_pause">일시정지</string>
+    <string name="general_resume">재개</string>
+    <string name="general_incoming">수신</string>
+    <string name="general_outgoing">발신</string>
+    <string name="general_reset">초기화</string>
+    <string name="general_play">재생</string>
     <string name="general_share">공유</string>
     <string name="general_delete">삭제</string>
     <string name="general_deleted">삭제됨</string>
-    <string name="disclaimer_checkbox_label">면책 조항을 읽었으며, 이 소프트웨어의 법적 요구사항, 책임 및 기술적 한계를 이해했습니다.</string>
-    <string name="sponsor_days_used">ShizuCallRecorder를 사용한 지 %1$d일이 되었습니다!</string>
-    <string name="sponsor_body">어릴 때부터 기술과 컴퓨터에 관심이 많았습니다. 제가 진행하는 프로젝트의 대부분은 제 자신의 신체적 또는 정신적 장애와 관련된 문제에 대한 해결책을 찾는 과정에서 시작되었고, 나머지는 그저 우연히 떠오른 영감에서 비롯되었습니다.\n\nShizuCallRecorder는 제 장애 중 하나와 관련된 개인적인 필요에서 탄생했습니다. 몇 년 동안 루팅되지 않은 기기에서도 작동하는 무료 오픈 소스(FOSS) 통화 녹음 앱을 찾아봤지만, 결국 찾지 못했습니다. 그런 앱은 존재하지 않았습니다. 그래서 직접 만들기로 결심했고, 이를 공개하게 되었습니다.\n\n저는 여가 시간의 상당 부분을 오픈 소스 소프트웨어를 배우고, 개발하고, 유지 관리하는 데 사용합니다. 여러분의 후원은 제 일상생활에 재정적으로 직접적인 도움을 주며, 제가 커뮤니티를 위해 높은 품질의 도구를 계속 만들어 나갈 수 있도록 동기를 부여합니다.\n\n저는 제 앱을 과도한 광고와 개인정보를 침해하는 추적 기능으로부터 자유롭게 유지하는 것을 중요하게 생각합니다. 제 도구들이 여러분의 일상생활에 도움이 되었다면, 후원을 고려해 주세요!</string>
-    <string name="sponsor_notification_body">이 프로젝트는 무료 오픈 소스이며, 광고가 전혀 포함되어 있지 않습니다. 이 도구가 여러분의 일상생활에 도움이 되었다면, 프로젝트 개발을 지원할 수 있는 방법을 확인해 주세요!</string>
-    <string name="sponsor_notification_action">후원 옵션 보기</string>
-    <string name="sponsor_notification_call_to_action_title">ShizuCallRecorder를 유용하게 사용하고 계신가요?</string>
+    <string name="general_system_limitation">시스템 제한</string>
+    <string name="general_system_limitation_message">이 기기의 셸 애플리케이션에 필요한 권한이 없어 ShizuCallRecorder가 작동하지 않습니다:\n\n%1$s\n\n할 수 있는 일이 없습니다. 앱이 작동할 수 없으므로 종료됩니다.</string>
+    <string name="general_permission_escalation_exhausted">'%1$s' 권한 '%2$s'을(를) 획득하지 못했습니다.\n모든 승격 단계(%3$d개)가 소진되었습니다.\n\nShizuku가 현재 실행 중인지 확인해 주세요. 이 오류의 원인일 수 있습니다.\n\n제조사가 권한 변경을 적극적으로 차단하거나 되돌리고 있을 수도 있습니다. 이 동작을 비활성화할 수 있는 항목이 있는지 휴대폰 설정을 확인해 주세요.\n\nVivo, Oppo, Xiaomi 및 기타 중국 제조사의 기기에는 이 권한에 대한 액세스를 완전히 차단할 수 있는 공격적인 시스템 제한이 포함되어 있는 경우가 많습니다.\n\nADB로 필요한 권한을 수동으로 부여하는 방법을 찾았다면 GitHub에 이슈를 만들어 알려주세요!</string>
+
+    <!-- ========================================== -->
+    <!-- ACCESSIBILITY (TalkBack)                   -->
+    <!-- ========================================== -->
+    <string name="a11y_overlay_action_start">녹음 시작</string>
+    <string name="a11y_overlay_action_pause">녹음 일시정지</string>
+    <string name="a11y_overlay_action_resume">녹음 재개</string>
+    <string name="a11y_overlay_recording_active">녹음 진행 중</string>
+    <string name="a11y_overlay_recording_paused">녹음 일시정지됨</string>
+    <string name="a11y_overlay_recording_stopped">녹음 준비됨</string>
+    <string name="a11y_overlay_drag_handle">드래그 핸들, 길게 눌러 오버레이를 이동하세요</string>
+    <string name="a11y_contact_photo">%1$s의 사진</string>
+
+    <!-- ========================================== -->
+    <!-- UI SECTIONS                                -->
+    <!-- ========================================== -->
+
+    <!-- Disclaimer Screen -->
+    <string name="disclaimer_title">ShizuCallRecorder에 오신 것을 환영합니다</string>
+    <string name="disclaimer_wiki_link_KEYWORD">위키</string>
+    <string name="disclaimer_introduction">계속하기 전에 위키의 설정 안내를 열어 읽어 주세요. 그런 다음 아래 면책 조항을 읽으십시오.</string>
+    <string name="disclaimer_checkbox_label">면책 조항을 읽었으며 이 소프트웨어의 법적 요구 사항, 책임 및 기술적 한계를 이해합니다.</string>
+    <string name="disclaimer_wait">%1$d초 대기</string>
+    <string name="disclaimer_must_read">면책 조항을 읽어야 합니다.</string>
+
+    <!-- Sponsor Screen -->
+    <string name="sponsor_title">프로젝트 지원</string>
+    <string name="sponsor_body_title">안녕하세요, 저는 kitsumed (Med)입니다! 👋</string>
+    <string name="sponsor_body">저는 어릴 때부터 기술과 컴퓨터에 관심이 많았습니다. 대부분의 프로젝트는 제 자신의 신체적 또는 정신적 장애를 위한 해결책을 찾는 과정에서 시작되었고, 나머지는 그저 우연한 영감에서 비롯되었습니다.\n\nShizuCallRecorder는 제 장애 중 하나와 관련된 개인적인 필요에서 탄생했습니다. 수년 동안 루트 권한 없이 작동하는 무료 오픈소스(FOSS) 통화 녹음 앱을 찾았지만 찾을 수 없었습니다. 아무것도 없었습니다. 그래서 직접 만들기로 결정했고, 공개했습니다.\n\n저는 여가 시간의 상당 부분을 오픈소스 소프트웨어를 배우고, 만들고, 유지하는 데 사용합니다. 여러분의 지원은 제 일상을 재정적으로 직접 돕고, 커뮤니티를 위한 고품질 도구를 계속 만들어 나가도록 동기를 부여합니다.\n\n저는 공격적인 광고와 개인정보를 침해하는 추적이 없는 앱을 유지하는 것을 믿습니다. 제 도구가 일상생활에 도움이 되었다면 지원을 고려해 주세요!</string>
+    <string name="sponsor_days_used">ShizuCallRecorder를 %1$d일째 사용 중이에요!</string>
+
+    <string name="sponsor_way_to_help">도울 수 있는 방법:</string>
+    <string name="sponsor_way_github_sponsor_title">GitHub 스폰서가 되기</string>
+    <string name="sponsor_way_github_sponsor_description">Public Sponsor 배지를 획득하고, 제 페이지에 프로필을 올리며, 저와 오픈소스 활동을 재정적으로 지원하세요.</string>
+    <string name="sponsor_way_github_star_title">GitHub에서 스타 주기</string>
+    <string name="sponsor_way_github_star_description">프로젝트의 가시성을 높여 다른 사람들이 찾을 수 있게 해 주세요.</string>
+    <string name="sponsor_way_contribute_title">기여하기</string>
+    <string name="sponsor_way_contribute_description">코드, 버그 리포트 또는 번역으로 도와주세요.</string>
+    <string name="sponsor_way_share_title">앱 공유하기</string>
+    <string name="sponsor_way_share_description">지인이나 커뮤니티에 ShizuCallRecorder를 알려주세요.</string>
+
+    <string name="sponsor_github_sponsor_button">GitHub에서 스폰서 하기</string>
+    <string name="sponsor_github_star_button">저장소 스타 주기</string>
+    <string name="sponsor_maybe_later_button">나중에</string>
+
+    <string name="sponsor_notification_body">이 프로젝트는 무료, 오픈소스이며 광고가 전혀 없습니다. 이 도구가 일상생활에 도움이 되었다면 프로젝트 개발을 지원할 방법을 확인해 보세요!</string>
+    <string name="sponsor_notification_action">지원 옵션 보기</string>
+    <string name="sponsor_notification_call_to_action_title">ShizuCallRecorder가 마음에 드시나요?</string>
+    <string name="sponsor_notification_call_to_action">도움이 필요합니다!</string>
+
+    <!-- Permissions Screen -->
     <string name="permissions_title">권한 설정</string>
-    <string name="permissions_intro">녹음을 시작하려면 몇 가지 권한이 필요합니다. ‘접근 권한 허용’을 누른 후 각 항목을 승인해 주세요.</string>
-    <string name="permissions_grant_access">접근 권한 허용</string>
-    <string name="permissions_status_required">필수</string>
-    <string name="permission_call_log_description">전화 상태 이벤트에서 가려지지 않은 전화번호를 수신하기 위해 필요합니다.</string>
-    <string name="permission_manage_ongoing_calls_label">진행 중인 통화 관리</string>
-    <string name="general_system_limitation">시스템 제한 사항</string>
-    <string name="general_permission_escalation_exhausted">‘%1$s’ 권한 ‘%2$s’를 획득하지 못했습니다.\n모든 권한 상승 단계(%3$d)를 시도했지만 실패했습니다.\n\nShizuku가 현재 실행 중인지 확인해 주세요. Shizuku가 실행되고 있지 않아 이 오류가 발생했을 수 있습니다.\n\n또한 사용 중인 기기의 제조사(OEM)가 모든 권한 변경을 적극적으로 차단하거나 원래 상태로 되돌리고 있을 수도 있습니다. 휴대전화 설정을 확인하여 이러한 동작을 비활성화할 수 있는 옵션이 있는지 살펴보세요.\n\nVivo, Oppo, Xiaomi, Huawei 및 기타 중국 제조사의 기기에는 공격적인 시스템 제한이 적용되는 경우가 많으며, 이로 인해 해당 권한에 대한 접근이 완전히 차단될 수 있습니다.\n\nADB를 사용하여 필요한 권한을 수동으로 부여할 방법을 찾으셨다면, GitHub에서 이슈를 생성하여 저희에게 알려 주세요!</string>
+    <string name="permissions_intro">녹음을 시작하려면 몇 가지 권한이 필요합니다. "권한 부여"를 눌러 각 항목을 승인하세요.</string>
+    <string name="permissions_grant_access">권한 부여</string>
+    <string name="permissions_status_granted">부여됨</string>
+    <string name="permissions_status_required">필요함</string>
+
+    <string name="permission_notifications_label">알림</string>
+    <string name="permission_notifications_description">녹음 상태 및 오류 알림에 사용됩니다.</string>
+
+    <string name="permission_contacts_label">연락처</string>
+    <string name="permission_contacts_description">무시 규칙을 위한 알려진 연락처 필터링에 사용됩니다.</string>
+
+    <string name="permission_phone_state_label">전화 상태</string>
+    <string name="permission_phone_state_description">통화 시작/종료를 감지하는 데 필요합니다.</string>
+
+    <string name="permission_call_log_label">통화 기록</string>
+    <string name="permission_call_log_description">전화 상태 이벤트에서 마스킹되지 않은 전화번호를 받는 데 필요합니다.</string>
+
+    <string name="permission_manage_ongoing_calls_label">진행 중 통화 관리</string>
+    <string name="permission_manage_ongoing_calls_description">Shizuku로 자동 부여되는 AppOps 권한입니다. InCallService로 통화를 감지하는 데 필요합니다.</string>
+
+    <string name="permission_battery_label">배터리 최적화</string>
+    <string name="permission_battery_description">필요할 때 앱을 유지하고 백그라운드 시작 제한을 우회할 수 있게 합니다.</string>
+
+    <string name="permission_storage_description">녹음이 저장될 위치를 선택하세요.</string>
+
+    <string name="permission_shizuku_description">scrcpy로 오디오 녹음(ShellService)을 시작하는 데 필요합니다.</string>
+    <string name="permission_shizuku_not_running">실행 중 아님</string>
+    <string name="permission_shizuku_open">Shizuku 열기</string>
+
+    <!-- Settings Screen: Section Titles -->
+    <string name="settings_section_about">정보</string>
+    <string name="settings_section_recording">녹음</string>
+    <string name="settings_section_visual">시각 설정</string>
+    <string name="settings_section_audio">오디오 설정</string>
+    <string name="settings_section_debug">디버그 옵션</string>
+    <string name="settings_section_security">보안</string>
+
+    <!-- Settings Screen: Security Section -->
+    <string name="settings_shizuku_auto_manage">Shizuku 관리</string>
+    <string name="settings_shizuku_auto_manage_desc">Shizuku 자동 시작/중지</string>
+    <string name="settings_shizuku_auth_key">Shizuku 인텐트 인증 키</string>
+    <string name="settings_shizuku_start_on_record">녹음 시에만 시작</string>
+    <string name="settings_shizuku_start_on_record_desc">녹음 버튼을 누르거나 자동 녹음 규칙이 일치할 때만 Shizuku가 시작됩니다</string>
+    <string name="settings_shizuku_keep_alive">Shizuku 유지</string>
+    <string name="settings_shizuku_keep_alive_desc">중지 인텐트를 보내지 않음</string>
+
+    <!-- Settings Screen: Recording Section -->
+    <string name="settings_call_detection_method">통화 감지 방식</string>
+    <string name="settings_call_detection_method_warning_title">지원 제한 안내</string>
+    <string name="call_detection_mode_phonestate_description">폐기된 필드를 사용하는 레거시 전화 상태 브로드캐스트를 사용합니다. 이 모드는 경쟁 조건에 매우 취약하며 제한된 정보만 제공합니다.</string>
+    <string name="call_detection_mode_phonestate_limited_support">이 통화 감지 방식은 신뢰할 수 없습니다. 전화 상태 업데이트 수신 시 폐기된 값을 가져오며 감지 로직은 경쟁 조건에 취약합니다. 또한 통신사 통화와 타사 통화를 구분할 수 없습니다. 그러나 익명 통화 무시 기능을 사용하여 이 제한을 우회할 수 있습니다.</string>
+    <string name="call_detection_mode_incallservice_description">최신 InCallService API를 사용합니다. 이 모드는 더 효율적이며 많은 정보로 더 나은 감지를 제공합니다.</string>
+
+    <string name="settings_record_third_party_calls">타사 앱 통화 녹음</string>
+    <string name="settings_record_third_party_calls_description">Android 통신 시스템에 통합된 타사 앱의 통화를 녹음합니다. 침묵 또는 한쪽만 녹음될 수 있습니다.</string>
+
+    <string name="settings_tap_to_select_folder">폴더 선택...</string>
+    <string name="settings_recording_folder_label">녹음 폴더</string>
+
+    <string name="settings_file_name_template">파일 이름 템플릿</string>
+    <string name="settings_file_name_template_placeholders">%s 자리 표시자:</string>
+    <string name="settings_file_name_template_placeholders_preview">미리보기: %1$s</string>
+    <string name="placeholder_date_desc">현재 날짜와 시간</string>
+    <string name="placeholder_date_year_desc">현재 연도 (예: 2026)</string>
+    <string name="placeholder_date_month_desc">현재 월, 두 자리 (01-12)</string>
+    <string name="placeholder_date_day_desc">현재 일, 두 자리 (01-31)</string>
+    <string name="placeholder_date_hours_desc">현재 시, 24시간제 두 자리 (00-23)</string>
+    <string name="placeholder_date_minutes_desc">현재 분, 두 자리 (00-59)</string>
+    <string name="placeholder_date_seconds_desc">현재 초, 두 자리 (00-59)</string>
+    <string name="placeholder_direction_desc">통화 방향 (in/out)</string>
+    <string name="placeholder_phone_number_desc">전화번호</string>
+    <string name="placeholder_caller_name_desc">발신자 이름, 연락처 목록을 먼저 확인하고 사용 가능한 경우 통신 CallerID로 대체</string>
+    <string name="placeholder_cross_country_desc">국제 통화 여부 (true/false)</string>
+    <string name="placeholder_package_name_desc">통화를 시작한 앱의 이름 또는 패키지 이름</string>
+
+    <string name="settings_post_recording_notification">녹음 후 알림</string>
+    <string name="settings_post_recording_notification_description">녹음 종료 후 재생/삭제 같은 빠른 작업이 포함된 알림을 표시합니다.</string>
+    <string name="settings_vibration_enabled">시작/종료 시 진동</string>
+
+    <string name="settings_auto_record_incoming">수신 통화 자동 녹음</string>
+    <string name="settings_auto_record_outgoing">발신 통화 자동 녹음</string>
+    <string name="settings_ignore_anonymous_incoming">익명 수신 통화 무시</string>
+    <string name="settings_ignore_cross_country_incoming">국제 수신 통화 무시</string>
+    <string name="settings_ignore_cross_country_outgoing">국제 발신 통화 무시</string>
+    <string name="settings_ignore_contacts_incoming">연락처 무시 (수신)</string>
+    <string name="settings_ignore_contacts_outgoing">연락처 무시 (발신)</string>
+    <string name="settings_ignore_contacts_none">모든 연락처 녹음</string>
+    <string name="settings_ignore_contacts_all">모든 연락처 무시</string>
+    <string name="settings_ignore_contacts_selected">선택한 연락처 무시</string>
+    <string name="settings_select_contacts">연락처 선택 (%1$d)</string>
+    <string name="settings_select_contacts_incoming">수신 연락처 선택</string>
+    <string name="settings_select_contacts_outgoing">발신 연락처 선택</string>
+
+    <string name="settings_auto_delete_recordings">오래된 녹음 자동 삭제</string>
+    <string name="settings_auto_delete_off">끄기 (영구 보관)</string>
+    <string name="settings_auto_delete_off_description">녹음이 무기한 보관됩니다.</string>
+    <string name="settings_auto_delete_days">%1$d일</string>
+    <string name="settings_auto_delete_days_description">통화 종료 시 %1$d일이 지난 녹음을 삭제합니다.</string>
+
+    <!-- Settings Screen: Visual Section -->
+    <string name="settings_language">언어</string>
+    <string name="settings_language_system">시스템 기본값</string>
+    <string name="settings_theme_mode">테마 모드</string>
+    <string name="settings_dynamic_color">다이나믹 테마 색상</string>
+    <string name="settings_show_toasts">토스트 알림 표시</string>
+    <string name="settings_overlay_title">녹음 오버레이 표시</string>
+    <string name="settings_overlay_subtitle">다른 앱 위에 녹음을 관리할 수 있는 빠른 작업 오버레이를 그립니다.</string>
+
+    <string name="settings_theme_mode_system">시스템 기본값</string>
+    <string name="settings_theme_mode_light">라이트</string>
+    <string name="settings_theme_mode_dark">다크</string>
+
+    <!-- Settings Screen: Audio Section -->
+    <string name="settings_audio_codec">오디오 코덱</string>
+    <string name="settings_audio_bitrate_recommendation">문제가 있으면 AAC를 사용해 보세요. 제조사에서 널리 지원합니다.</string>
+
+    <string name="settings_audio_bitrate">오디오 비트레이트</string>
+
+    <string name="settings_audio_source">오디오 소스</string>
+    <string name="audio_source_voice_comm_description">음성 통신에 최적화된 마이크 오디오 소스. 내장 에코 제거.</string>
+
+    <string name="audio_source_mic_description">기기 기본 마이크에서 직접 오디오를 캡처합니다. 약간의 노이즈 감소.</string>
+
+    <string name="audio_source_voice_call_description">통화 양쪽 모두를 녹음합니다. 전화음이 포함된 원본 오디오.</string>
+
+    <string name="audio_source_playback_description">녹음을 제한하는 앱을 제외하고 다른 앱의 오디오를 캡처합니다 (앱 옵트아웃 플래그 준수).</string>
+
+    <string name="audio_source_output_description">스피커로 전송되는 최종 결합 오디오를 그대로 캡처합니다.</string>
+
+    <string name="audio_source_mic_unprocessed_description">자동 필터링이나 개선 없이 원시 마이크 오디오를 캡처합니다.</string>
+
+    <string name="audio_source_mic_camcorder_description">카메라 방향의 오디오에 초점을 맞춘 비디오 녹화용.</string>
+
+    <string name="audio_source_mic_voice_recognition_description">음성 인식용으로 처리된 마이크 (노이즈 감소).</string>
+
+    <string name="audio_source_voice_call_uplink_description">통화의 내 목소리만 녹음합니다 (업링크).</string>
+
+    <string name="audio_source_voice_call_downlink_description">통화 상대방 목소리만 녹음합니다 (다운링크).</string>
+
+    <string name="audio_source_voice_performance_description">라이브 음악 및 실시간 오디오 앱용 고속 마이크 모드.</string>
+
+    <!-- Settings Screen: Debug Section -->
+    <string name="settings_debug_logging_enabled">로그 녹음 활성화</string>
+    <string name="settings_debug_logging_enabled_description">버그를 신고하려면 이 기능을 켜고 앱을 다시 시작한 후 문제를 재현하세요.</string>
+    <string name="settings_debug_logging_title">버그 신고 절차</string>
+    <string name="settings_debug_logging_steps">
+        1. GitHub에 이미 신고된 문제인지 확인하고, 아니라면 계속하세요.\n
+        2. 로그 녹음을 켠 상태로 버그를 재현하세요.\n
+        3. 아래의 리포트 생성 버튼을 눌러 휴대폰에 로그를 저장하세요.\n
+        4. GitHub에 신고 버튼을 눌러 새 이슈를 열고, 필드를 채우고 로그 파일을 첨부하세요.
+    </string>
+    <string name="settings_debug_logging_step_warning">공유하기 전에 생성된 파일에 민감한 정보가 없는지 검토하세요. 완료 후 로그 녹음을 끄세요.</string>
+    <string name="settings_debug_logging_step_warning_no_redaction">⚠️ 디버그 모드가 켜져 있습니다. 로그 마스킹이 비활성화되었습니다.</string>
+    <string name="settings_debug_logging_generate_report">리포트 생성</string>
+    <string name="settings_debug_logging_report_on_github">GitHub에 신고</string>
+    <string name="settings_debug_mode">디버그 모드 활성화</string>
+    <string name="settings_debug_mode_description">개발자 옵션 표시, 로그 마스킹 비활성화.</string>
+    <string name="settings_debug_caller_number">디버그 전화번호</string>
+
+    <!-- Settings Screen: About/Server Section -->
+    <string name="settings_view_licenses">라이선스 보기</string>
+    <string name="settings_open_github_Wiki">위키 열기</string>
+
+    <!-- ContactSelection Dialog -->
+    <string name="contact_search_hint">이름 또는 번호로 검색...</string>
+    <string name="contact_select_all">모두 선택</string>
+    <string name="contact_unselect_all">모두 선택 해제</string>
+
+    <!-- ========================================== -->
+    <!-- SERVICES & BACKGROUND                      -->
+    <!-- ========================================== -->
+
+    <!-- Recording Service: Notifications -->
+    <string name="recording_standby_notification_title">통화 진행 중</string>
+    <string name="recording_notification_cross_country_tip">🌐국제 통화</string>
+    <string name="recording_notification_current_country_tip">🏠국내 통화</string>
+    <string name="recording_notification_title">녹음 진행 중</string>
+    <string name="recording_notification_press_to_start">눌러서 녹음 시작</string>
+    <string name="recording_notification_waiting_shizuku">Shizuku 서버 시작 대기 중...</string>
+    <string name="recording_notification_press_to_pause">눌러서 녹음 일시정지</string>
+    <string name="recording_notification_press_to_resume">눌러서 녹음 재개</string>
+    <string name="recording_toast_standby">%1$s 통화 대기 중입니다.</string>
+    <string name="recording_toast_ended">통화 종료. 녹음이 중지되었습니다.</string>
+    <string name="recording_toast_paused">녹음이 일시정지되었습니다.</string>
+    <string name="recording_toast_resumed">녹음이 재개되었습니다.</string>
+    <string name="recording_started">녹음이 시작되었습니다.</string>
+    <string name="post_recording_notification_title">녹음 관리</string>
+    <string name="post_recording_notification_unknown_caller">익명 또는 알 수 없는 발신자</string>
+    <!-- Recording Service: DeleteDialogConfirmationActivity -->
+    <string name="delete_recording_confirmation_title">녹음 삭제</string>
+    <string name="delete_recording_confirmation_message">이 녹음을 삭제하시겠습니까? 이 작업은 되돌릴 수 없습니다.</string>
+    <string name="delete_recording_confirmation_failed">녹음을 삭제하지 못했습니다. 앱 로그를 확인해 주세요.</string>
+    <!-- Recording Service: Errors -->
+    <string name="recording_error_title">녹음 오류</string>
+    <string name="recording_error_folder_missing">선택한 출력 폴더가 없거나, 유효하지 않거나, 쓰기 권한이 없습니다. 앱 설정에서 폴더를 선택하세요.</string>
+    <string name="recording_error_server_missing">scrcpy-server 바이너리가 없거나 보안 SHA256 검사에 실패했습니다. 발생해서는 안 되는 상황이니 신고해 주세요.</string>
+    <string name="recording_error_file_creation">녹음 파일을 만들지 못했습니다. 저장소 권한을 확인하거나 앱 설정에서 새 녹음 폴더를 선택하세요.</string>
+    <string name="recording_error_start_failed">녹음을 시작하지 못했습니다. ShellService 바인더 메서드 호출 중 오류가 발생했습니다.</string>
+    <string name="recording_unexpected_error">녹음 중 예기치 않은 오류가 발생했습니다. 재현 단계와 앱 로그와 함께 신고해 주세요.</string>
+    <!-- Recording Service: Errors Shizuku -->
+    <string name="recording_error_shizuku_disconnected_unexpectedly">Shizuku가 예기치 않게 연결이 끊어져 녹음 프로세스가 중지되었습니다. (Shizuku 서버 프로세스가 종료됨)</string>
+    <string name="recording_shizuku_not_started">Shizuku 서버 프로세스가 중지되었습니다. Shizuku를 시작하고 앱이 오디오를 녹음하려 할 때 항상 실행될 수 있도록 하세요.</string>
+    <string name="recording_shizuku_permission_denied">앱이 Shizuku를 사용하도록 허용해 주세요. 권한이 거부되었습니다.</string>
+    <string name="recording_shizuku_auth_key_missing">Shizuku 인텐트 인증 키가 없습니다. 앱 설정에서 입력해 주세요.</string>
 </resources>

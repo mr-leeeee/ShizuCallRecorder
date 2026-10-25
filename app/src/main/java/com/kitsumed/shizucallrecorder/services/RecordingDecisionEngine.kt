@@ -17,6 +17,7 @@ import com.kitsumed.shizucallrecorder.data.call.CallDirection
 import com.kitsumed.shizucallrecorder.data.call.EnrichedCallData
 import com.kitsumed.shizucallrecorder.data.call.RawCallData
 import com.kitsumed.shizucallrecorder.services.recording.RecordingForegroundService
+import com.kitsumed.shizucallrecorder.services.recording.RecordingCleanupManager
 import com.kitsumed.shizucallrecorder.system.permissions.PermissionChecks
 import com.kitsumed.shizucallrecorder.utils.AppLogger
 import com.kitsumed.shizucallrecorder.utils.PhoneNumberManager
@@ -101,6 +102,15 @@ class RecordingDecisionEngine private constructor(context: Context) {
         }
         appContext.startService(intent)
         checkAndTriggerSupportNotification();
+
+        val autoDeleteDays = appPreferences.getAutoDeleteAfterDays()
+        if (autoDeleteDays > 0) {
+            // Cleanup runs off the calling thread: DocumentFile listing/deleting can be slow
+            // on folders with many files and must never block the call-detection path.
+            Thread {
+                RecordingCleanupManager.cleanupOldRecordings(appContext, autoDeleteDays)
+            }.start()
+        }
     }
 
     /**

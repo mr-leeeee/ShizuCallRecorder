@@ -81,6 +81,7 @@ interface SettingsActions {
     fun setOverlayEnabled(enabled: Boolean)
     fun setPlaybackCaptureAllowed(enabled: Boolean)
     fun setAudioChannelSplitEnabled(enabled: Boolean)
+    fun setAutoDeleteAfterDays(days: Int)
 }
 
 /**
@@ -484,6 +485,15 @@ class SettingsViewModel(application: Application) : AndroidViewModel(application
             }
         }
 
+        refresh()
+    }
+
+    /**
+     * Sets the auto-delete retention period for old recordings.
+     * @param days Retention period in days. 0 disables auto-delete.
+     */
+    override fun setAutoDeleteAfterDays(days: Int) {
+        preferences.setAutoDeleteAfterDays(days)
         refresh()
     }
 }

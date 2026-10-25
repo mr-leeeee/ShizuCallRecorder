@@ -210,6 +210,12 @@
     <string name="settings_select_contacts_incoming">Select incoming contacts</string>
     <string name="settings_select_contacts_outgoing">Select outgoing contacts</string>
 
+    <string name="settings_auto_delete_recordings">Auto-delete old recordings</string>
+    <string name="settings_auto_delete_off">Off (keep forever)</string>
+    <string name="settings_auto_delete_off_description">Recordings are kept indefinitely.</string>
+    <string name="settings_auto_delete_days">%1$d days</string>
+    <string name="settings_auto_delete_days_description">Delete recordings older than %1$d days when a call ends.</string>
+
     <!-- Settings Screen: Visual Section -->
     <string name="settings_language">Language</string>
     <string name="settings_language_system">System Default</string>

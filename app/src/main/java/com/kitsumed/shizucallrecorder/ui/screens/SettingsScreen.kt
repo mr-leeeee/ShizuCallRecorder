@@ -564,6 +564,7 @@ private fun RecordingSection(
     val ignoreCrossCountryOutgoing = remember(updateTrigger) { preferences.isIgnoreCrossCountryOutgoingEnabled() }
     val ignoredContactsIncomingCount = remember(updateTrigger) { preferences.getIgnoredContactsIncoming().size }
     val ignoredContactsOutgoingCount = remember(updateTrigger) { preferences.getIgnoredContactsOutgoing().size }
+    val autoDeleteDays = remember(updateTrigger) { preferences.getAutoDeleteAfterDays() }
 
     var showFileNameFormatDialog by remember { mutableStateOf(false) }
 
@@ -758,6 +759,32 @@ private fun RecordingSection(
                 )
             }
         }
+
+        HorizontalDivider(modifier = Modifier.padding(horizontal = 16.dp), thickness = 0.5.dp)
+
+        val autoDeleteOptions = listOf(0, 7, 30, 90, 365).map { days ->
+            OptionItem(
+                key = days.toString(),
+                label = if (days == 0) {
+                    stringResource(R.string.settings_auto_delete_off)
+                } else {
+                    stringResource(R.string.settings_auto_delete_days, days)
+                },
+                description = if (days == 0) {
+                    stringResource(R.string.settings_auto_delete_off_description)
+                } else {
+                    stringResource(R.string.settings_auto_delete_days_description, days)
+                }
+            )
+        }
+
+        M3DropdownField(
+            label = stringResource(R.string.settings_auto_delete_recordings),
+            selected = autoDeleteOptions.find { it.key == autoDeleteDays.toString() } ?: autoDeleteOptions.first(),
+            options = autoDeleteOptions,
+            onOptionSelected = { selectedItem -> actions.setAutoDeleteAfterDays(selectedItem.key.toInt()) },
+            modifier = Modifier.padding(horizontal = 16.dp, vertical = 2.dp)
+        )
     }
 
     if (showFileNameFormatDialog) {
@@ -1278,6 +1305,7 @@ private fun SettingsScreenPreview() {
             override fun setOverlayEnabled(enabled: Boolean) {}
             override fun setPlaybackCaptureAllowed(enabled: Boolean) {}
             override fun setAudioChannelSplitEnabled(enabled: Boolean) {}
+            override fun setAutoDeleteAfterDays(days: Int) {}
         }
 
         // File name template selection dialog

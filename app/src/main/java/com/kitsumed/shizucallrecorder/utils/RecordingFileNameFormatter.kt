@@ -100,7 +100,7 @@ object RecordingFileNameFormatter {
             sanitizeFileNamePart(getAppName(context, metadata.packageName))
         }
 
-        val baseName = template
+        var baseName = template
             .replace(FileNamePlaceholder.DATE_YEAR.tag, dateYearStr)
             .replace(FileNamePlaceholder.DATE_MONTH.tag, dateMonthStr)
             .replace(FileNamePlaceholder.DATE_DAY.tag, dateDayStr)
@@ -113,6 +113,16 @@ object RecordingFileNameFormatter {
             .replace(FileNamePlaceholder.CALLER_NAME.tag, callerNameStr)
             .replace(FileNamePlaceholder.CROSS_COUNTRY.tag, crossCountryStr)
             .replace(FileNamePlaceholder.PACKAGE_NAME.tag, packageName)
+
+        // {caller_name} expands to an empty string when the caller is not in the contacts list.
+        // Collapse the separator it leaves behind (e.g. "out__+82114" -> "out_+82114") and trim
+        // any leading/trailing underscore so file names stay clean for unknown callers.
+        if (template.contains(FileNamePlaceholder.CALLER_NAME.tag) && callerNameStr.isBlank()) {
+            baseName = baseName.replace("__", "_").trim('_')
+        }
+
+        // Prevent subfolder creation: replace path separators that SAF would interpret as directories.
+        baseName = baseName.replace(Regex("[/\\\\]"), "-")
 
         AppLogger.v( "Formatted base filename: '$baseName' with template '$template'")
         return "$baseName${codec.containerExtension}"

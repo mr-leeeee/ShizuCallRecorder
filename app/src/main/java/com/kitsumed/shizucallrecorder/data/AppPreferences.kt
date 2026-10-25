@@ -51,6 +51,9 @@ class AppPreferences(context: Context) {
         const val AUTO_RECORD_INCOMING = false
         const val AUTO_RECORD_OUTGOING = false
 
+        // --- Cleanup ---
+        const val AUTO_DELETE_AFTER_DAYS = 0
+
         
         // --- Filters & Contacts ---
         const val IGNORE_ANONYMOUS_INCOMING = false
@@ -74,7 +77,7 @@ class AppPreferences(context: Context) {
         val AUDIO_BITRATE = RecordingCodec.OPUS.defaultBitRate
 
         // --- File Naming ---
-        const val FILE_NAME_TEMPLATE = "{date}_{direction}_{phone_number}"
+        const val FILE_NAME_TEMPLATE = "{date}_{direction}_{caller_name}_{phone_number}"
 
         // --- UI & Appearance ---
         val THEME_MODE = ThemeMode.SYSTEM
@@ -131,7 +134,8 @@ class AppPreferences(context: Context) {
         SHIZUKU_KEEP_ALIVE("shizuku_keep_alive"),
         SHIZUKU_AUTH_KEY("shizuku_auth_key"),
         CALL_DETECTION_MODE("call_detection_mode"),
-        RECORD_THIRD_PARTY_CALLS("record_third_party_calls");
+        RECORD_THIRD_PARTY_CALLS("record_third_party_calls"),
+        AUTO_DELETE_AFTER_DAYS("auto_delete_after_days");
     }
 
     // -------- Nested enums
@@ -286,6 +290,20 @@ class AppPreferences(context: Context) {
     fun isRecordThirdPartyCallsEnabled() = getBoolean(Key.RECORD_THIRD_PARTY_CALLS, DefaultsValue.RECORD_THIRD_PARTY_CALLS)
     /** Sets whether recording of calls from third-party apps is enabled. */
     fun setRecordThirdPartyCallsEnabled(enabled: Boolean) = setBoolean(Key.RECORD_THIRD_PARTY_CALLS, enabled)
+
+    // -------- Cleanup --------
+
+    /**
+     * Gets the number of days after which old recordings are automatically deleted when a call ends.
+     * @return The retention period in days, or 0 when auto-delete is disabled.
+     */
+    fun getAutoDeleteAfterDays() = getInt(Key.AUTO_DELETE_AFTER_DAYS, DefaultsValue.AUTO_DELETE_AFTER_DAYS)
+
+    /**
+     * Sets the number of days after which old recordings are automatically deleted when a call ends.
+     * @param days The retention period in days. Pass 0 to disable auto-delete.
+     */
+    fun setAutoDeleteAfterDays(days: Int) = setInt(Key.AUTO_DELETE_AFTER_DAYS, days)
 
     // -------- Automation --------
 
